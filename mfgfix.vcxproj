@@ -203,7 +203,8 @@
       <AdditionalDependencies>.\CommonLibSSE\build\Release\CommonLibSSE.lib;.\CommonLibSSE\build\vcpkg_installed\x64-windows-static-md\lib\spdlog.lib;.\CommonLibSSE\build\vcpkg_installed\x64-windows-static-md\lib\fmt.lib;.\CommonLibSSE\build\vcpkg_installed\x64-windows-static-md\lib\binary_io.lib;.\Detours\lib.X64\detours.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(TargetFileName)" "D:\Steam\Steamapps\common\Skyrim Special Edition\Data\SKSE\Plugins\$(TargetFileName)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
