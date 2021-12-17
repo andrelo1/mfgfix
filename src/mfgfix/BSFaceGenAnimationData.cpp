@@ -1,7 +1,5 @@
 #include "BSFaceGenAnimationData.h"
-//#include "REL/SafeWrite.h"
 #include "Offsets.h"
-//#include "GameSettings.h"
 #include "Settings.h"
 
 namespace MfgFix
@@ -285,312 +283,93 @@ namespace MfgFix
 	{
 		RE::BSSpinLockGuard locker(lock);
 
-		unk217 = false;
-
-		// @removed
-		//if (updateBlinking)
-		//	UpdateEyesBlinking(timeDelta);
-		/*
-		if (unk21A)	{
-			// @removed
-			//float blinkLeft = modifier3.count > 0 ? modifier3.values[0] : 0.0f;
-			//float blinkRight = modifier3.count > 1 ? modifier3.values[1] : 0.0f;
-
-			// @removed
-			//if ((blinkLeft < 1.0f || blinkRight < 1.0f) && eyesBlinkingStage != BlinkingStage::BlinkDownAndWait1)
-			// @added
-			if (eyesBlinkingStage != BlinkingStage::BlinkDownAndWait1) {
-				// @removed
-
-				//BSSpinLockGuard locker(lock);
-
-				//if (!expressionOverride && transitionTarget)
-				//{
-				//	// Todo:
-				//	// UnkFunc_66E0(&transitionTarget, keyFrameCache_1790);
-				//}
-
-				//expression1.timer = 0.0f;
-				//if (!expression1.isUpdated)
-				//	expression1.Reset(true);
-				//modifier1.timer = 0.0f;
-				//modifier1.Reset(true);
-				//phoneme1.timer = 0.0f;
-				//phoneme1.Reset(true);
-				//
-				//if (unk228)
-				//{
-				//	// Todo:
-				//	// UnkFunc_49F0(UnkObject_4840.unk_D0, unk228);
-				//	// unk228 = nullptr;
-				//}
-
-				//expression2.timer = 0.0f;
-				//expression2.Reset(true);
-				//modifier2.timer = 0.0f;
-				//modifier2.Reset(true);
-				//phoneme2.timer = 0.0f;
-				//phoneme2.Reset(true);
-
-				//expression3.Reset(true);
-				//modifier3.Reset(true);
-				//phoneme3.Reset(true);
-
-				// @added
-				Reset(0.0f, true, true, true, false);
-
-				// @removed
-				//modifier3.SetValue(0, 1.0f);
-				//modifier3.SetValue(1, 1.0f);
-
-				unk217 = true;
-
-				eyesBlinkingStage = BlinkingStage::BlinkDownAndWait1;
-				eyesBlinkingTimer = 0.0f;
-			}
-		}
-		*/
-		// @removed
-		//if (timeDelta > 0.0f)
+		// expressions
 		{
-			//bool flag1, flag2, flag3, flag4, flag5;
-
-			// @removed
-
-			//flag1 = expression1.TransitionUpdate(timeDelta, transitionTarget);
-			//flag2 = (!unk21C && unk21B) || expression2.Unk0B(); // has value > 0
-
-			//if (!flag1 && !flag2)
-			//{
-			//	if (!expressionOverride && transitionTarget)
-			//	{
-			//		// Todo:
-			//		// UnkFunc_66E0(&transitionTarget, keyFrameCache_1790);
-			//	}
-			//}
-
-			//if (flag1)
-			//{
-			//	expression3.Copy(&expression1);
-
-			//	if (flag2)
-			//		expression3.Interpolate2(&expression2, 1.0f, false, false);
-			//}
-			//else
-			//{
-			//	if (flag2)
-			//		expression3.Copy(&expression2);
-			//}
-
-			//flag3 = flag1 || flag2;
-
-			// @added
-
-			// expressions
-			{
-				auto merge = [](BSFaceGenKeyframeMultiple& a_src, BSFaceGenKeyframeMultiple& a_dst) {
-					if (!a_src.IsZero()) {
-						a_dst.Copy(&a_src);
-					}
-				};
-
-				expression3.Reset();
-
-				expression1.TransitionUpdate(a_timeDelta, transitionTarget);
-
-				merge(expression1, expression3);
-				merge(expression2, expression3);
-
-				//std::vector<float> merged(expression3.count, 0.0f);
-
-				//std::copy(expression1.values, expression1.values + std::min((std::size_t)expression1.count, std::size(merged)), std::begin(merged));
-				//MergeValues<BSFaceGenKeyframe::Type::Expression>(expression2.values, expression2.values + std::min((std::size_t)expression2.count, std::size(merged)), std::begin(merged));
-
-				//if (!std::equal(std::begin(merged), std::end(merged), expression3.values, AlmostEqual))
-				//{
-				//	std::copy(std::begin(merged), std::end(merged), expression3.values);
-				//	expression3.isUpdated = false;
-				//	unk217 = true;
-				//}
-			}
-
-			// @removed
-
-			//flag1 = UpdateDialogModifiers(timeDelta);
-			//flag2 = (!unk21C && unk21B) || modifier2.Unk0B(); // has value > 0
-
-			//if (flag1)
-			//{
-			//	modifier3.Copy(&modifier1);
-
-			//	if (flag2)
-			//		modifier3.Interpolate2(&modifier2, 1.0f, false, false);
-			//}
-			//else
-			//{
-			//	if (flag2)
-			//		modifier3.Copy(&modifier2);
-			//}
-
-			//flag1 = flag1 || flag2;
-
-			// @added
-
-			// modifiers
-			{
-				auto merge = [](BSFaceGenKeyframeMultiple& a_src, BSFaceGenKeyframeMultiple& a_dst) {
-					auto count = std::min(a_src.count, a_dst.count);
-					for (std::uint32_t i = 0; i < count; ++i) {
-						if (a_src.values[i] != 0.0f) {
-							a_dst.values[i] = a_src.values[i];
-						}
-					}
-					if (a_src.values[Modifier::LookDown] != 0.0f || a_src.values[Modifier::LookLeft] != 0.0f || a_src.values[Modifier::LookRight] != 0.0f || a_src.values[Modifier::LookUp] != 0.0f) {
-						a_dst.values[Modifier::LookDown] = a_src.values[Modifier::LookDown];
-						a_dst.values[Modifier::LookLeft] = a_src.values[Modifier::LookLeft];
-						a_dst.values[Modifier::LookRight] = a_src.values[Modifier::LookRight];
-						a_dst.values[Modifier::LookUp] = a_src.values[Modifier::LookUp];
-					}
-				};
-
-				modifier3.Reset();
-
-				DialogueModifiersUpdate(a_timeDelta);
-				EyesBlinkingUpdate(a_timeDelta);
-
-				merge(modifier1, modifier3);
-
-				if (!unk21A) {
-					EyesMovementUpdate(a_timeDelta);
-					EyesDirectionUpdate(a_timeDelta);
+			auto merge = [](Keyframe& a_src, Keyframe& a_dst) {
+				if (!a_src.IsZero()) {
+					a_dst.Copy(&a_src);
 				}
+			};
 
-				merge(modifier2, modifier3);
+			expression3.Reset();
 
-				//DialogModifiersUpdate(timeDelta);
+			expression1.TransitionUpdate(a_timeDelta, transitionTarget);
 
-				//std::vector<float> eyesBlinking(modifier3.count, 0.0f);
-				//std::vector<float> eyesMovement(modifier3.count, 0.0f);
-
-				//EyesBlinkingUpdate(timeDelta, eyesBlinking);
-				//EyesDirectionUpdate(timeDelta, eyesMovement);
-
-				//std::vector<float> merged(modifier3.count, 0.0f);
-
-				//std::copy(std::begin(eyesBlinking), std::begin(eyesBlinking) + std::min(std::size(eyesBlinking), std::size(merged)), std::begin(merged));
-				//MergeValues<BSFaceGenKeyframe::Type::Modifier>(modifier1.values, modifier1.values + std::min((std::size_t)modifier1.count, std::size(merged)), std::begin(merged));
-				//MergeValues<BSFaceGenKeyframe::Type::Modifier>(std::begin(eyesMovement), std::begin(eyesMovement) + std::min(std::size(eyesMovement), std::size(merged)), std::begin(merged));
-				//MergeValues<BSFaceGenKeyframe::Type::Modifier>(modifier2.values, modifier2.values + std::min((std::size_t)modifier2.count, std::size(merged)), std::begin(merged));
-
-				//if (!std::equal(std::begin(merged), std::end(merged), modifier3.values, AlmostEqual))
-				//{
-				//	std::copy(std::begin(merged), std::end(merged), modifier3.values);
-				//	modifier3.isUpdated = false;
-				//	unk217 = true;
-				//}
-			}
-
-			// @removed
-
-			//flag2 = UpdateDialogPhonemes(timeDelta);
-			//flag4 = (!unk21C && unk21B) || phoneme2.Unk0B(); // has value > 0
-
-			//if (flag2)
-			//{
-			//	phoneme3.Copy(&phoneme1);
-
-			//	if (flag4)
-			//		phoneme3.Interpolate2(&phoneme2, 1.0f, false, false);
-			//}
-			//else
-			//{
-			//	if (flag4)
-			//		phoneme3.Copy(&phoneme2);
-			//}
-
-			//flag2 = flag2 || flag4;
-
-			// @added
-
-			// phonemes
-			{
-				auto merge = [](BSFaceGenKeyframeMultiple& a_src, BSFaceGenKeyframeMultiple& a_dst) {
-					auto count = std::min(a_src.count, a_dst.count);
-					for (std::uint32_t i = 0; i < count; ++i) {
-						if (a_src.values[i] != 0.0f) {
-							a_dst.values[i] = a_src.values[i];
-						}
-					}
-				};
-
-				phoneme3.Reset();
-
-				DialoguePhonemesUpdate(a_timeDelta);
-
-				merge(phoneme1, phoneme3);
-				merge(phoneme2, phoneme3);
-
-				//DialoguePhonemesUpdate(timeDelta);
-
-				//std::vector<float> merged(phoneme3.count, 0.0f);
-
-				//std::copy(phoneme1.values, phoneme1.values + std::min((std::size_t)phoneme1.count, std::size(merged)), std::begin(merged));
-				//MergeValues<BSFaceGenKeyframe::Type::Phoneme>(phoneme2.values, phoneme2.values + std::min((std::size_t)phoneme2.count, std::size(merged)), std::begin(merged));
-
-				//if (!std::equal(std::begin(merged), std::end(merged), phoneme3.values, AlmostEqual))
-				//{
-				//	std::copy(std::begin(merged), std::end(merged), phoneme3.values);
-				//	phoneme3.isUpdated = false;
-				//	unk217 = true;
-				//}
-			}
-
-			// @removed
-
-			//flag5 = (!unk21C && unk21B) || custom2.Unk0B(); // has value > 0
-
-			//if (flag5)
-			//	custom3.Copy(&custom2);
-
-			// @added
-
-			// custom
-			{
-				auto merge = [](BSFaceGenKeyframeMultiple& a_src, BSFaceGenKeyframeMultiple& a_dst) {
-					auto count = std::min(a_src.count, a_dst.count);
-					for (std::uint32_t i = 0; i < count; ++i) {
-						if (a_src.values[i] != 0.0f) {
-							a_dst.values[i] = a_src.values[i];
-						}
-					}
-				};
-
-				custom3.Reset();
-
-				merge(custom2, custom3);
-				//if (!std::equal(custom2.values, custom2.values + std::min(custom2.count, custom3.count), custom3.values, AlmostEqual)) {
-				//	std::copy(custom2.values, custom2.values + std::min(custom2.count, custom3.count), custom3.values);
-				//	custom3.isUpdated = false;
-				//	unk217 = true;
-				//}
-			}
-
-			// @removed
-			//unk217 |= flag1 || flag2 || flag3 || flag5;
-
-			{
-				// Issue: flickering facial expressions.
-				// Sometimes update is needed even if keyframes values were not changed.
-				// For example, SKSE calls UpdateModelFace() in functions SetExpressionPhoneme() and SetExpressionModifier() that cause reseting of all face morphs.
-				//unk217 |= expressionOverride || expression2.Unk_0B() || modifier2.Unk_0B() || phoneme2.Unk_0B() || custom2.Unk_0B();
-				unk217 = true;
-			}
-
-			CheckAndReleaseDialogueData();
+			merge(expression1, expression3);
+			merge(expression2, expression3);
 		}
 
-		// @removed
-		//unk21C = unk21B;
+		// modifiers
+		{
+			auto merge = [](Keyframe& a_src, Keyframe& a_dst) {
+				auto count = std::min(a_src.count, a_dst.count);
+				for (std::uint32_t i = 0; i < count; ++i) {
+					if (a_src.values[i] != 0.0f) {
+						a_dst.values[i] = a_src.values[i];
+					}
+				}
+				if (a_src.values[Modifier::LookDown] != 0.0f || a_src.values[Modifier::LookLeft] != 0.0f || a_src.values[Modifier::LookRight] != 0.0f || a_src.values[Modifier::LookUp] != 0.0f) {
+					a_dst.values[Modifier::LookDown] = a_src.values[Modifier::LookDown];
+					a_dst.values[Modifier::LookLeft] = a_src.values[Modifier::LookLeft];
+					a_dst.values[Modifier::LookRight] = a_src.values[Modifier::LookRight];
+					a_dst.values[Modifier::LookUp] = a_src.values[Modifier::LookUp];
+				}
+			};
+
+			modifier3.Reset();
+
+			DialogueModifiersUpdate(a_timeDelta);
+			EyesBlinkingUpdate(a_timeDelta);
+
+			merge(modifier1, modifier3);
+
+			if (!unk21A) {
+				EyesMovementUpdate(a_timeDelta);
+				EyesDirectionUpdate(a_timeDelta);
+			}
+
+			merge(modifier2, modifier3);
+		}
+
+		// phonemes
+		{
+			auto merge = [](Keyframe& a_src, Keyframe& a_dst) {
+				auto count = std::min(a_src.count, a_dst.count);
+				for (std::uint32_t i = 0; i < count; ++i) {
+					if (a_src.values[i] != 0.0f) {
+						a_dst.values[i] = a_src.values[i];
+					}
+				}
+			};
+
+			phoneme3.Reset();
+
+			DialoguePhonemesUpdate(a_timeDelta);
+
+			merge(phoneme1, phoneme3);
+			merge(phoneme2, phoneme3);
+		}
+
+		// custom
+		{
+			auto merge = [](BSFaceGenKeyframeMultiple& a_src, BSFaceGenKeyframeMultiple& a_dst) {
+				auto count = std::min(a_src.count, a_dst.count);
+				for (std::uint32_t i = 0; i < count; ++i) {
+					if (a_src.values[i] != 0.0f) {
+						a_dst.values[i] = a_src.values[i];
+					}
+				}
+			};
+
+			custom3.Reset();
+
+			merge(custom1, custom3);
+			merge(custom2, custom3);
+		}
+
+		CheckAndReleaseDialogueData();
+
+		unk217 = true;
 
 		return unk217;
 	}
