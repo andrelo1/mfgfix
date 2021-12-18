@@ -1,12 +1,12 @@
 # mfgfix-ae
 
 ## Dependencies
-- CommonLibSSE
-- Detours
+- [CommonLibSSE](https://github.com/Ryan-rsm-McKenzie/CommonLibSSE)
+- [Detours](https://github.com/microsoft/Detours)
 ## How to build
 #### Prerequisites
 - Visual Studio 2019
-- vcpkg (for CommonLibSSE)
+- [vcpkg](https://github.com/microsoft/vcpkg) (for CommonLibSSE)
 
 Open x64 Native Tools Command Prompt for VS 2019.
 
