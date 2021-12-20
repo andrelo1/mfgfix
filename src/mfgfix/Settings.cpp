@@ -113,9 +113,7 @@ namespace MfgFix
 		CSimpleIniA ini;
 		auto path = GetIniPath();
 
-		if (ini.LoadFile(path.c_str()) != SI_Error::SI_OK) {
-			return;
-		}
+		ini.LoadFile(path.c_str());
 
 		ini.SetDoubleValue("EyesBlinking", "fBlinkDownTime", eyesBlinking.fBlinkDownTime);
 		ini.SetDoubleValue("EyesBlinking", "fBlinkUpTime", eyesBlinking.fBlinkUpTime);
