@@ -13,19 +13,21 @@ Open x64 Native Tools Command Prompt for VS 2019.
 Clone repository:
 ```
 git clone https://github.com/andrelo1/mfgfix-ae
+```
+Clone libraries:
+```
 cd mfgfix-ae
-```
-Clone and build CommonLibSSE:
-```
 git clone https://github.com/Ryan-rsm-McKenzie/CommonLibSSE
+git clone https://github.com/microsoft/Detours
+```
+Build CommonLibSSE:
+```
 cd CommonLibSSE
 cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static-md
-cd ..
 ```
-Clone and build Detours:
+Build Detours:
 ```
-git clone https://github.com/microsoft/Detours
-cd Detours/src
+cd ../Detours/src
 nmake
 ```
 Open `mfgfix.sln` in Visual Studio and build solution.
