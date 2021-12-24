@@ -1,7 +1,5 @@
 #include "Settings.h"
 #include "SimpleIni.h"
-#include <filesystem>
-#include <any>
 
 namespace MfgFix
 {
