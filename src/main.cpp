@@ -19,7 +19,7 @@ extern "C" DLLEXPORT SKSE::PluginVersionData SKSEPlugin_Version{ GetPluginVersio
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
 {
-	auto path = logger::log_directory();
+	auto path = SKSE::log::log_directory();
 
 	if (path) {
 		*path /= Version::PROJECT;
