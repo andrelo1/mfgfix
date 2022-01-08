@@ -9,7 +9,6 @@ namespace
 		version.PluginVersion({ Version::MAJOR, Version::MINOR, Version::PATCH, 0 });
 		version.PluginName(Version::PROJECT);
 		version.UsesAddressLibrary(true);
-		version.CompatibleVersions({ SKSE::RUNTIME_1_6_317, SKSE::RUNTIME_1_6_318, {1, 6, 323, 0}, {1, 6, 342, 0} });
 
 		return version;
 	}
