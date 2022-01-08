@@ -32,11 +32,6 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_
 
 	spdlog::info("loaded");
 
-	if (a_skse->IsEditor()) {
-		spdlog::critical("loaded in editor, marking as incompatible"sv);
-		return false;
-	}
-
 	SKSE::Init(a_skse);
 	MfgFix::Init();
 

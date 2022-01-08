@@ -18,7 +18,7 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileVersion", "1.6.0.0"
-            VALUE "InternalName", "mfgfix"
+            VALUE "InternalName", "mfgfix.dll"
             VALUE "LegalCopyright", "MIT License"
             VALUE "OriginalFilename", "mfgfix.dll"
             VALUE "ProductName", "mfgfix"
