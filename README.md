@@ -3,7 +3,7 @@
 ## Dependencies
 - [CommonLibSSE](https://github.com/Ryan-rsm-McKenzie/CommonLibSSE)
 - [Detours](https://github.com/microsoft/Detours)
-## How to build
+## Building
 Prerequisites:
 - Visual Studio 2019
 - [vcpkg](https://github.com/microsoft/vcpkg) (for CommonLibSSE)
