@@ -93,16 +93,13 @@ namespace MfgFix::MfgConsoleFunc
 		return -1;
 	}
 
-	bool Register(RE::BSScript::IVirtualMachine* a_vm)
+	void Register()
 	{
-		a_vm->RegisterFunction("SetPhonemeModifier", "MfgConsoleFunc", SetPhonemeModifier);
-		a_vm->RegisterFunction("GetPhonemeModifier", "MfgConsoleFunc", GetPhonemeModifier);
+		SKSE::GetPapyrusInterface()->Register([](RE::BSScript::IVirtualMachine* a_vm) {
+			a_vm->RegisterFunction("SetPhonemeModifier", "MfgConsoleFunc", SetPhonemeModifier);
+			a_vm->RegisterFunction("GetPhonemeModifier", "MfgConsoleFunc", GetPhonemeModifier);
 
-		return true;
-	}
-
-	void Init()
-	{
-		SKSE::GetPapyrusInterface()->Register(Register);
+			return true;
+		});
 	}
 }

@@ -28,7 +28,7 @@ namespace MfgFix
 		return settings;
 	}
 
-	void Settings::ReadIni()
+	void Settings::Read()
 	{
 		CSimpleIniA ini;
 		auto path = GetIniPath();
@@ -106,7 +106,7 @@ namespace MfgFix
 		eyesMovement.fEyeOffsetDelayMaxEmotionCombatShout = static_cast<float>(ini.GetDoubleValue("EyesMovement", "fEyeOffsetDelayMaxEmotionCombatShout", eyesMovement.fEyeOffsetDelayMaxEmotionCombatShout));
 	}
 
-	void Settings::WriteIni()
+	void Settings::Write()
 	{
 		CSimpleIniA ini;
 		auto path = GetIniPath();
@@ -182,10 +182,5 @@ namespace MfgFix
 		ini.SetDoubleValue("EyesMovement", "fEyeOffsetDelayMaxEmotionCombatShout", eyesMovement.fEyeOffsetDelayMaxEmotionCombatShout);
 
 		ini.SaveFile(path.c_str());
-	}
-
-	void SettingsNS::Init()
-	{
-		Settings::Get().ReadIni();
 	}
 }

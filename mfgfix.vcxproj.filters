@@ -27,16 +27,13 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\mfgfix\mfgfix.cpp">
+    <ClCompile Include="src\mfgfix\mfgfixinit.cpp">
       <Filter>src\mfgfix</Filter>
     </ClCompile>
     <ClCompile Include="src\mfgfix\Settings.cpp">
       <Filter>src\mfgfix</Filter>
     </ClCompile>
     <ClCompile Include="src\mfgfix\BSFaceGenAnimationData.cpp">
-      <Filter>src\mfgfix</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mfgfix\Misc.cpp">
       <Filter>src\mfgfix</Filter>
     </ClCompile>
     <ClCompile Include="src\mfgfix\ConsoleCommands.cpp">
@@ -59,7 +56,7 @@
     <ClInclude Include="src\version.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\mfgfix\mfgfix.h">
+    <ClInclude Include="src\mfgfix\mfgfixinit.h">
       <Filter>src\mfgfix</Filter>
     </ClInclude>
     <ClInclude Include="src\mfgfix\Settings.h">
@@ -78,9 +75,6 @@
       <Filter>src\mfgfix</Filter>
     </ClInclude>
     <ClInclude Include="src\mfgfix\Offsets.h">
-      <Filter>src\mfgfix</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mfgfix\Misc.h">
       <Filter>src\mfgfix</Filter>
     </ClInclude>
     <ClInclude Include="src\mfgfix\ConsoleCommands.h">

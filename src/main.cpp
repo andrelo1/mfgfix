@@ -1,8 +1,8 @@
-#include "mfgfix/mfgfix.h"
+#include "mfgfix/mfgfixinit.h"
 
 namespace
 {
-	constexpr SKSE::PluginVersionData GetPluginVersion()
+	constexpr SKSE::PluginVersionData GetPluginVersionData()
 	{
 		SKSE::PluginVersionData version;
 
@@ -14,9 +14,9 @@ namespace
 	}
 }
 
-extern "C" DLLEXPORT SKSE::PluginVersionData SKSEPlugin_Version{ GetPluginVersion() };
+extern "C" __declspec(dllexport) SKSE::PluginVersionData SKSEPlugin_Version{ GetPluginVersionData() };
 
-extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
+extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
 {
 	auto path = SKSE::log::log_directory();
 
@@ -28,7 +28,6 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_
 
 	spdlog::set_level(spdlog::level::trace);
 	spdlog::flush_on(spdlog::level::trace);
-
 	spdlog::info("loaded");
 
 	SKSE::Init(a_skse);

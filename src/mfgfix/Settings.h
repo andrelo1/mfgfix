@@ -81,15 +81,10 @@ namespace MfgFix
 
 		static Settings&	Get();
 
-		void	ReadIni();
-		void	WriteIni();
+		void	Read();
+		void	Write();
 
 		EyesBlinking	eyesBlinking;
 		EyesMovement	eyesMovement;
 	};
-
-	namespace SettingsNS
-	{
-		void	Init();
-	}
 }

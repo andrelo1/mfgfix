@@ -6,7 +6,7 @@ namespace MfgFix::Offsets
 
 	namespace
 	{
-		static constexpr REL::ID ModifyFaceGen_Execute(static_cast<std::uint64_t>(23017));
+		static constexpr REL::ID ModifyFaceGenCommand(static_cast<std::uint64_t>(23017));
 		static constexpr REL::ID GetExpressionName(static_cast<std::uint64_t>(27007));
 		static constexpr REL::ID GetModifierName(static_cast<std::uint64_t>(27008));
 		static constexpr REL::ID GetPhonemeName(static_cast<std::uint64_t>(27009));

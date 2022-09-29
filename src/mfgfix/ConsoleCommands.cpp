@@ -6,10 +6,7 @@ namespace MfgFix::ConsoleCommands
 {
 	using Keyframe = BSFaceGenAnimationData::Keyframe;
 
-	namespace
-	{
-		uintptr_t ModifyFaceGen_ExecuteAddr{ 0 };
-	}
+	uintptr_t ModifyFaceGenCommandAddr{ 0 };
 
 	void SetValue(RE::TESObjectREFR* a_ref, Keyframe::Type a_keyframeType, std::uint32_t a_idx, float a_value)
 	{
@@ -115,14 +112,14 @@ namespace MfgFix::ConsoleCommands
 		animData->Reset(0.0f, true, true, true, false);
 	}
 
-	bool ModifyFaceGen_Execute(const RE::SCRIPT_PARAMETER* a_paramInfo, RE::SCRIPT_FUNCTION::ScriptData* a_scriptData, RE::TESObjectREFR* a_thisObj, RE::TESObjectREFR* a_containingObj, RE::Script* a_scriptObj, RE::ScriptLocals* a_locals, double& a_result, std::uint32_t& a_opcodeOffsetPtr)
+	bool ModifyFaceGenCommand(const RE::SCRIPT_PARAMETER* a_paramInfo, RE::SCRIPT_FUNCTION::ScriptData* a_scriptData, RE::TESObjectREFR* a_thisObj, RE::TESObjectREFR* a_containingObj, RE::Script* a_scriptObj, RE::ScriptLocals* a_locals, double& a_result, std::uint32_t& a_opcodeOffsetPtr)
 	{
-		using func_t = decltype(&ModifyFaceGen_Execute);
-		REL::Relocation<func_t> func(ModifyFaceGen_ExecuteAddr);
+		using func_t = decltype(&ModifyFaceGenCommand);
+		REL::Relocation<func_t> func(ModifyFaceGenCommandAddr);
 		return func(a_paramInfo, a_scriptData, a_thisObj, a_containingObj, a_scriptObj, a_locals, a_result, a_opcodeOffsetPtr);
 	}
 
-	bool ModifyFaceGen_Execute_Hook(const RE::SCRIPT_PARAMETER* a_paramInfo, RE::SCRIPT_FUNCTION::ScriptData* a_scriptData, RE::TESObjectREFR* a_thisObj, RE::TESObjectREFR* a_containingObj, RE::Script* a_scriptObj, RE::ScriptLocals* a_locals, double& a_result, std::uint32_t& a_opcodeOffsetPtr)
+	bool ModifyFaceGenCommandHook(const RE::SCRIPT_PARAMETER* a_paramInfo, RE::SCRIPT_FUNCTION::ScriptData* a_scriptData, RE::TESObjectREFR* a_thisObj, RE::TESObjectREFR* a_containingObj, RE::Script* a_scriptObj, RE::ScriptLocals* a_locals, double& a_result, std::uint32_t& a_opcodeOffsetPtr)
 	{
 		auto thisObj = a_thisObj ? a_thisObj : RE::PlayerCharacter::GetSingleton();
 
@@ -167,16 +164,16 @@ namespace MfgFix::ConsoleCommands
 			}
 		}
 
-		return ModifyFaceGen_Execute(a_paramInfo, a_scriptData, a_thisObj, a_containingObj, a_scriptObj, a_locals, a_result, a_opcodeOffsetPtr);
+		return ModifyFaceGenCommand(a_paramInfo, a_scriptData, a_thisObj, a_containingObj, a_scriptObj, a_locals, a_result, a_opcodeOffsetPtr);
 	}
 
 	void Init()
 	{
-		ModifyFaceGen_ExecuteAddr = Offsets::ModifyFaceGen_Execute.address();
+		ModifyFaceGenCommandAddr = Offsets::ModifyFaceGenCommand.address();
 
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourAttach(reinterpret_cast<PVOID*>(&ModifyFaceGen_ExecuteAddr), reinterpret_cast<PVOID>(ModifyFaceGen_Execute_Hook));
+		DetourAttach(reinterpret_cast<PVOID*>(&ModifyFaceGenCommandAddr), reinterpret_cast<PVOID>(ModifyFaceGenCommandHook));
 
 		if (DetourTransactionCommit() != NO_ERROR) {
 			spdlog::error("failed to attach detour");

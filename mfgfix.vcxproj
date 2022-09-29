@@ -27,8 +27,7 @@
     <ClCompile Include="src\mfgfix\BSFaceGenKeyframeMultiple.cpp" />
     <ClCompile Include="src\mfgfix\ConsoleCommands.cpp" />
     <ClCompile Include="src\mfgfix\MfgConsoleFunc.cpp" />
-    <ClCompile Include="src\mfgfix\mfgfix.cpp" />
-    <ClCompile Include="src\mfgfix\Misc.cpp" />
+    <ClCompile Include="src\mfgfix\mfgfixinit.cpp" />
     <ClCompile Include="src\mfgfix\SettingsPapyrus.cpp" />
     <ClCompile Include="src\mfgfix\Settings.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -42,8 +41,7 @@
     <ClInclude Include="src\mfgfix\BSFaceGenKeyframeMultiple.h" />
     <ClInclude Include="src\mfgfix\ConsoleCommands.h" />
     <ClInclude Include="src\mfgfix\MfgConsoleFunc.h" />
-    <ClInclude Include="src\mfgfix\mfgfix.h" />
-    <ClInclude Include="src\mfgfix\Misc.h" />
+    <ClInclude Include="src\mfgfix\mfgfixinit.h" />
     <ClInclude Include="src\mfgfix\Offsets.h" />
     <ClInclude Include="src\mfgfix\SettingsPapyrus.h" />
     <ClInclude Include="src\mfgfix\Settings.h" />

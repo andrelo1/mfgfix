@@ -279,7 +279,7 @@ namespace MfgFix
 		modifier3.values[Modifier::LookUp] = eyesPitch > 0.0f ? (eyesPitchMax != 0.0f ? eyesPitch / eyesPitchMax : 0.0f) : 0.0f;
 	}
 
-	bool BSFaceGenAnimationData::KeyframesUpdate_Hook(float a_timeDelta, bool a_updateBlinking)
+	bool BSFaceGenAnimationData::KeyframesUpdateHook(float a_timeDelta, bool a_updateBlinking)
 	{
 		RE::BSSpinLockGuard locker(lock);
 
@@ -374,20 +374,20 @@ namespace MfgFix
 		return unk217;
 	}
 
-	void BSFaceGenAnimationDataNS::Init()
+	void BSFaceGenAnimationData::Init()
 	{
 		auto KeyframesUpdateAddr = Offsets::BSFaceGenAnimationData::KeyframesUpdate.address();
-		auto KeyframesUpdateHook = &BSFaceGenAnimationData::KeyframesUpdate_Hook;
+		auto KeyframesUpdateHookAddr = &KeyframesUpdateHook;
 
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourAttach(reinterpret_cast<PVOID*>(&KeyframesUpdateAddr), reinterpret_cast<PVOID&>(KeyframesUpdateHook));
+		DetourAttach(reinterpret_cast<PVOID*>(&KeyframesUpdateAddr), reinterpret_cast<PVOID&>(KeyframesUpdateHookAddr));
 
 		if (DetourTransactionCommit() != NO_ERROR) {
 			spdlog::error("failed to attach detour");
 		}
 
-		// Remove eyes direction update from UpdateDownwardPass because it is now in KeyframesUpdate.
+		// remove eyes update from UpdateDownwardPass, it was moved to KeyframesUpdate
 		REL::safe_write(Offsets::BSFaceGenNiNode::sub_3F1800.address() + 0x0139, static_cast<std::uint16_t>(0x47EB));
 	}
 }

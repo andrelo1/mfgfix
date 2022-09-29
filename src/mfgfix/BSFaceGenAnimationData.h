@@ -41,18 +41,18 @@ namespace MfgFix
 		};
 
 		Keyframe*				transitionTarget;	// 18 used to animate transition between expressions
-		Keyframe				expression1;		// 20 used by SetExpressionOverride()
-		Keyframe				expression2;		// 40
-		Keyframe				modifier2;			// 60 used by console command "mfg modifier"
-		Keyframe				phoneme2;			// 80 used by console command "mfg phoneme"
-		Keyframe				custom2;			// A0
-		Keyframe				expression3;		// C0 resulting expressions
-		Keyframe				modifier1;			// E0 dialogues
-		Keyframe				modifier3;			// 100 resulting modifiers
-		Keyframe				phoneme1;			// 120 dialogues
-		Keyframe				phoneme3;			// 140 resulting phonemes
-		Keyframe				custom1;			// 160
-		Keyframe				custom3;			// 180 resulting custom
+		Keyframe				expression1;		// 20 used by console command and SetExpressionOverride
+		Keyframe				expression2;		// 40 unused?
+		Keyframe				modifier2;			// 60 used by console command
+		Keyframe				phoneme2;			// 80 used by console command
+		Keyframe				custom2;			// A0 used by console command
+		Keyframe				expression3;		// C0 final values
+		Keyframe				modifier1;			// E0 dialogue values
+		Keyframe				modifier3;			// 100 final values
+		Keyframe				phoneme1;			// 120 dialogue values
+		Keyframe				phoneme3;			// 140 final values
+		Keyframe				custom1;			// 160 unused?
+		Keyframe				custom3;			// 180 final values
 		float					unk1A0;				// 1A0
 		float					unk1A4;				// 1A4
 		float					unk1A8;				// 1A8
@@ -110,13 +110,10 @@ namespace MfgFix
 		void			EyesBlinkingUpdate(float a_timeDelta);
 		void			EyesMovementUpdate(float a_timeDelta);
 		void			EyesDirectionUpdate(float a_timeDelta);
-		bool			KeyframesUpdate_Hook(float a_timeDelta, bool a_updateBlinking);
+		bool			KeyframesUpdateHook(float a_timeDelta, bool a_updateBlinking);
+
+		static void		Init();
 	};
 
 	static_assert(sizeof(BSFaceGenAnimationData) == 0x230);
-
-	namespace BSFaceGenAnimationDataNS
-	{
-		void	Init();
-	}
 }

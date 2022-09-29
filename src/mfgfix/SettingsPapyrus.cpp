@@ -5,7 +5,7 @@ namespace MfgFix::SettingsPapyrus
 {
 	void Save(RE::StaticFunctionTag*)
 	{
-		Settings::Get().WriteIni();
+		Settings::Get().Write();
 	}
 
 	float GetFBlinkDownTime(RE::StaticFunctionTag*)
@@ -678,7 +678,7 @@ namespace MfgFix::SettingsPapyrus
 		Settings::Get().eyesMovement.fEyeOffsetDelayMaxEmotionCombatShout = a_value;
 	}
 
-	void Init()
+	void Register()
 	{
 		SKSE::GetPapyrusInterface()->Register([](RE::BSScript::IVirtualMachine* a_vm) {
 			a_vm->RegisterFunction("Save", "MFGFIX_Settings", Save);
