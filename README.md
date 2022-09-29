@@ -1,4 +1,4 @@
-# mfgfix-ae
+# mfgfix
 
 ## Dependencies
 - [CommonLibSSE](https://github.com/Ryan-rsm-McKenzie/CommonLibSSE)
@@ -12,11 +12,11 @@ Open x64 Native Tools Command Prompt for VS 2022.
 
 Clone repository:
 ```
-git clone --recurse-submodules https://github.com/andrelo1/mfgfix-ae
+git clone --recurse-submodules https://github.com/andrelo1/mfgfix
 ```
 Build CommonLibSSE:
 ```
-cd mfgfix-ae/ext/CommonLibSSE
+cd mfgfix/ext/CommonLibSSE
 cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static-md
 cmake --build build --config Release
 ```
