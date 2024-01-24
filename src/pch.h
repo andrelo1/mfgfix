@@ -6,8 +6,8 @@
 
 #define NOMINMAX
 #include <windows.h>
-#include "Detours/include/detours.h"
+#include <detours/detours.h>
 
 using namespace std::literals;
 
-#include "version.h"
+#include "Plugin.h"

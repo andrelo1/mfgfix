@@ -1,27 +1,34 @@
 #include "mfgfix/mfgfixinit.h"
 
-namespace
+#ifdef SKYRIM_SUPPORT_AE
+extern "C" __declspec(dllexport) constinit auto SKSEPlugin_Version = []() {
+	SKSE::PluginVersionData v;
+	v.PluginVersion(Plugin::VERSION);
+	v.PluginName(Plugin::NAME);
+	v.AuthorName("andrelo1"sv);
+	v.UsesAddressLibrary();
+	v.UsesNoStructs();
+	// v.UsesUpdatedStructs();
+	v.CompatibleVersions({ SKSE::RUNTIME_LATEST });
+	// v.CompatibleVersions({ SKSE::RUNTIME_1_6_353 });
+	return v;
+}();
+#else
+extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface*, SKSE::PluginInfo* a_info)
 {
-	constexpr SKSE::PluginVersionData GetPluginVersionData()
-	{
-		SKSE::PluginVersionData version;
-
-		version.PluginVersion({ Version::MAJOR, Version::MINOR, Version::PATCH, 0 });
-		version.PluginName(Version::PROJECT);
-		version.UsesAddressLibrary(true);
-
-		return version;
-	}
+	a_info->infoVersion = SKSE::PluginInfo::kVersion;
+	a_info->name = Plugin::NAME.data();
+	a_info->version = Plugin::VERSION.pack();
+	return true;
 }
-
-extern "C" __declspec(dllexport) SKSE::PluginVersionData SKSEPlugin_Version{ GetPluginVersionData() };
+#endif
 
 extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
 {
 	auto path = SKSE::log::log_directory();
 
 	if (path) {
-		*path /= Version::PROJECT;
+		*path /= Plugin::NAME;
 		*path += ".log";
 		spdlog::set_default_logger(spdlog::basic_logger_mt("default", path->string(), true));
 	}

@@ -279,7 +279,7 @@ namespace MfgFix
 		modifier3.values[Modifier::LookUp] = eyesPitch > 0.0f ? (eyesPitchMax != 0.0f ? eyesPitch / eyesPitchMax : 0.0f) : 0.0f;
 	}
 
-	bool BSFaceGenAnimationData::KeyframesUpdateHook(float a_timeDelta, bool a_updateBlinking)
+	bool BSFaceGenAnimationData::KeyframesUpdateHook(float a_timeDelta, bool /* a_updateBlinking */)
 	{
 		RE::BSSpinLockGuard locker(lock);
 
