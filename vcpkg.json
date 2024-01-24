@@ -1,0 +1,18 @@
+{
+  "name": "mfgfix",
+  "version-string": "1.6.1.0",
+  "description": "Fixes mfg console command and adds some more fixes for Skyrim.",
+  "dependencies": [
+    "rsm-binary-io",
+    "detours",
+    "spdlog",
+    "simpleini"
+  ],
+  "overrides": [
+    {
+      "name": "fmt",
+      "version": "9.1.0"
+    }
+  ],
+  "builtin-baseline": "a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6"
+}

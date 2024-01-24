@@ -1,6 +1,4 @@
-[submodule "ext/CommonLibSSE"]
-	path = ext/CommonLibSSE
-	url = https://github.com/Ryan-rsm-McKenzie/CommonLibSSE
-[submodule "ext/Detours"]
-	path = ext/Detours
-	url = https://github.com/microsoft/Detours
+[submodule "lib/CommonLibSSE"]
+	path = lib/CommonLibSSE
+	url = https://github.com/powerof3/CommonLibSSE.git
+	branch = dev

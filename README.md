@@ -1,8 +1,8 @@
 # mfgfix
 
 ## Dependencies
-- [CommonLibSSE](https://github.com/Ryan-rsm-McKenzie/CommonLibSSE)
-- [Detours](https://github.com/microsoft/Detours)
+- [CommonLibSSE](https://github.com/powerof3/CommonLibSSE)
+
 ## Building
 Prerequisites:
 - Visual Studio 2022
@@ -14,18 +14,16 @@ Clone repository:
 ```
 git clone --recurse-submodules https://github.com/andrelo1/mfgfix
 ```
-Build CommonLibSSE:
+
+Set environment variables for:
+- `VCPKG_ROOT=[path to vcpkg]`
+- `VCPKG_INSTALLATION_ROOT=[path to vcpkg]`
+
+Open folder in Visual Studio, after the cmake has self-configured, select target `vs2022-windows-vcpkg-ae-Release` or `vs2022-windows-vcpkg-se-Release` and build away.
+
+You can probably do something like this, but ymmv:
 
 ```
-cd mfgfix/ext/CommonLibSSE
-cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static-md
+cmake -B build -S . -DVCPKG_ROOT=[path to vcpkg] -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=vs2022-windows-vcpkg-[ae or se]
 cmake --build build --config Release
 ```
-Build Detours:
-```
-cd ../Detours/
-nmake
-```
-Build mfgfix:
-
-Open and build `mfgfix.sln` in Visual Studio.

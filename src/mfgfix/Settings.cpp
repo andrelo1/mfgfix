@@ -1,5 +1,5 @@
 #include "Settings.h"
-#include "SimpleIni.h"
+#include <SimpleIni.h>
 
 namespace MfgFix
 {
@@ -33,7 +33,7 @@ namespace MfgFix
 		CSimpleIniA ini;
 		auto path = GetIniPath();
 
-		if (ini.LoadFile(path.c_str()) != SI_Error::SI_OK) {
+		if (ini.LoadFile(path.c_str()) != SI_OK) {
 			return;
 		}
 

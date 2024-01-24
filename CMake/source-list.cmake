@@ -1,0 +1,21 @@
+set(CXX_FILES
+	src/PCH.h
+	src/main.cpp
+
+	src/mfgfix/BSFaceGenAnimationData.cpp
+	src/mfgfix/BSFaceGenAnimationData.h
+	src/mfgfix/BSFaceGenKeyframe.h
+	src/mfgfix/BSFaceGenKeyframeMultiple.cpp
+	src/mfgfix/BSFaceGenKeyframeMultiple.h
+	src/mfgfix/ConsoleCommands.cpp
+	src/mfgfix/ConsoleCommands.h
+	src/mfgfix/MfgConsoleFunc.cpp
+	src/mfgfix/MfgConsoleFunc.h
+	src/mfgfix/mfgfixinit.cpp
+	src/mfgfix/mfgfixinit.h
+	src/mfgfix/Offsets.h
+	src/mfgfix/Settings.cpp
+	src/mfgfix/Settings.h
+	src/mfgfix/SettingsPapyrus.cpp
+	src/mfgfix/SettingsPapyrus.h
+)
